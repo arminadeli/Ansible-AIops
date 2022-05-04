@@ -5,4 +5,5 @@
      shell:
       "kubectl get pods -A"
      register: podslist
-   - debug: msg="{{podlist.stdout_lines}}"
+   - debug: 
+      var: podlist.stdout_lines
