@@ -3,4 +3,4 @@
   tasks:
    #- name: print variable
    - debug: 
-       msg: {{ message }}
+       msg: "this is the variable = {{ message }}"
