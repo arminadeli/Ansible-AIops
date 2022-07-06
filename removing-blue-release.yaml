@@ -1,6 +1,8 @@
 - name: Pod list
+  vars:
+    test_var: "message = {{ message }}"
   hosts: all
   tasks:
    #- name: print variable
-   - debug: 
-       msg: "this is the variable = {{ message }}"
+- debug: 
+  msg: "this is the variable = ('vars', test_var)"
