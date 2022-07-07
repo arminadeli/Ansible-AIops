@@ -7,8 +7,7 @@
 
    - name: delete ingress
      shell:
-      "kubectl delete ing deployment-canary-blue"
-      "kubectl delete svc deployment-blue"
+      "kubectl delete ing deployment-canary-blue && kubectl delete svc deployment-blue"
 
    - name: change folder to access yaml files
      shell:
