@@ -1,6 +1,18 @@
-- name: Pod list
+- name: remove blue deployment
   hosts: all
   tasks:
-   - name: print variable
-     debug: 
-       msg: "this is the variable = {{ message }}"
+   - name: delete blue pod
+     shell:
+      "kubectl delete deployment deployment-blue"
+
+   - name: delete ingress
+     shell:
+      "kubectl delete ing deployment-canary-blue"
+
+   - name: change folder to access yaml files
+     shell:
+      "cd /home/ubuntu/k8s/canary-release/"
+
+   - name: update ingress to route all traffic to green
+     shell:
+      "kubectl apply -f ingress-canary-green.yaml"
