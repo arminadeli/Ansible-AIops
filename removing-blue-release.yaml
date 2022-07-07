@@ -3,15 +3,11 @@
   tasks:
    - name: delete blue pod
      shell:
-      "kubectl delete deployment deployment-blue"
+      "kubectl delete deployment deployment-blue && kubectl delete svc deployment-blue"
 
    - name: delete ingress
      shell:
-      "kubectl delete ing deployment-canary-blue && kubectl delete svc deployment-blue"
-
-   #- name: change folder to access yaml files
-    # shell:
-    #  "cd /home/ubuntu/k8s/canary-release/"
+      "kubectl delete ing deployment-canary-blue"
 
    - name: update ingress to route all traffic to green
      shell:
