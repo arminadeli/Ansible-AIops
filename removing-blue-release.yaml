@@ -9,10 +9,10 @@
      shell:
       "kubectl delete ing deployment-canary-blue && kubectl delete svc deployment-blue"
 
-   - name: change folder to access yaml files
-     shell:
-      "cd /home/ubuntu/k8s/canary-release/"
+   #- name: change folder to access yaml files
+    # shell:
+    #  "cd /home/ubuntu/k8s/canary-release/"
 
    - name: update ingress to route all traffic to green
      shell:
-      "kubectl apply -f ingress-canary-green.yaml"
+      "kubectl apply -f /home/ubuntu/k8s/canary-release/ingress-canary-green.yaml"
