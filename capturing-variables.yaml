@@ -1,0 +1,6 @@
+- name: Pod list
+  hosts: all
+  tasks:
+   - name: print variable
+     debug: 
+       msg: "this is the variable = {{ message }}"
