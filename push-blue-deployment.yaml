@@ -1,0 +1,12 @@
+- name: add blue deployment
+  hosts: all
+  tasks:
+   - name: deploy blue pod
+     shell:
+      "kubectl apply -f /home/ubuntu/k8s/canary-release/blue-deployment.yaml"
+
+   - name: add blue deployment to ingress
+     shell:
+      "kubectl apply -f /home/ubuntu/k8s/canary-release/ingress-canary-faulty.yaml "
+
+   
