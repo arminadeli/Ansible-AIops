@@ -4,17 +4,17 @@
    - name: delete blue pod
      shell:
       "kubectl delete deployment deployment-blue && kubectl delete svc deployment-blue"
-     when: {{ state }} == "OPEN"
+     when: "{{ state }}" == "OPEN"
 
    - name: delete ingress
      shell:
       "kubectl delete ing deployment-canary-blue"
-     when: {{ state }} == "OPEN"
+     when: "{{ state }}" == "OPEN"
 
    - name: update ingress to route all traffic to green
      shell:
       "kubectl apply -f /home/ubuntu/k8s/canary-release/ingress-canary-green.yaml"
-     when: {{ state }} == "OPEN"
+     when: "{{ state }}" == "OPEN"
 
    - name: Update Problem card on Dynatrace
      uri:
@@ -28,4 +28,4 @@
         body:
           message: "Blue deployment has been deleted"
           context: "Ansible Tower"
-       when: {{ state }} == "OPEN"
+       when: "{{ state }}" == "OPEN"
