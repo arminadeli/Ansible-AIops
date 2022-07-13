@@ -20,7 +20,7 @@
        headers:
          Content-Type: "application/json"
          Authorization: "{{ dttoken }}"
-       body_format: JSON
+       body_format: json
        body:
          RequestBody:
            message: "this is a comment from ansible"
