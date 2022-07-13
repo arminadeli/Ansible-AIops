@@ -22,7 +22,5 @@
          Authorization: "Api-Token {{ dttoken }}"
 
        body_format: json
-       body:
-         RequestBody:
-           message: "this is a comment from ansible"
-           context: "Ansible Tower"
+          message: "Blue deployment has been deleted"
+          context: "Ansible Tower"
