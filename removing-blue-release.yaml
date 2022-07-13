@@ -12,3 +12,16 @@
    - name: update ingress to route all traffic to green
      shell:
       "kubectl apply -f /home/ubuntu/k8s/canary-release/ingress-canary-green.yaml"
+
+   - name: Update Problem card on Dynatrace
+     uri:
+       url: {{ dtcommentapiurl }}
+       method: POST
+       headers:
+         Content-Type: "application/json"
+         Authorization: {{ dttoken }}
+       body_format: JSON
+       body:
+         RequestBody:
+           message: "this is a comment from ansible"
+           context: "this is the context for comment from ansible"
