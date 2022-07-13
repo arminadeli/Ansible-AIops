@@ -19,7 +19,7 @@
        method: POST
        headers:
          Content-Type: "application/json"
-         Authorization: "{{ dttoken }}"
+         Authorization: "Api-Token {{ dttoken }}"
 
        body_format: json
        body:
