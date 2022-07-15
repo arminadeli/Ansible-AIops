@@ -23,7 +23,7 @@
        headers:
          Content-Type: "application/json"
          Authorization: "Api-Token {{ dttoken }}"
-
+       status_code: 201
        body_format: json
        body:
          message: "Blue deployment has been deleted"
