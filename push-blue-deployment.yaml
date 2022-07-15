@@ -7,6 +7,4 @@
 
    - name: add blue deployment to ingress
      shell:
-      "kubectl apply -f /home/ubuntu/k8s/canary-release/ingress-canary-faulty.yaml "
-
-   
+      "kubectl apply -f /home/ubuntu/k8s/canary-release/ingress-canary-service-v2.yaml"
