@@ -11,7 +11,7 @@
        status_code: 201
        body_format: json
        body:
-         message: "{ \"comment\": \"Evaluating the issue.\", \"user\": \"{{commentuser}}\", \"context\": \"Ansible Tower\" }"
+         message: "{ \"comment\": \"Evaluating the issue.\"}"
          context: "Ansible Tower"
      when: state  == "OPEN"
 
