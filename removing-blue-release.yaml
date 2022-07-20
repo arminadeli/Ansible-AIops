@@ -1,19 +1,19 @@
 - name: remove blue deployment
   hosts: all
   tasks:
-    - name: Dynatrace identified the problem
-      uri:
-        url: "{{ dtcommentapiurl }}"
-        method: POST
-        headers:
-          Content-Type: "application/json"
-          Authorization: "Api-Token {{ dttoken }}"
-        status_code: 201
-        body_format: json
-        body:
-          message: "{ \"comment\": \"Evaluating the issue.\", \"user\": \"{{commentuser}}\", \"context\": \"Ansible Tower\" }"
-          context: "Ansible Tower"
-      when: state  == "OPEN"
+   - name: Dynatrace identified the problem
+     uri:
+       url: "{{ dtcommentapiurl }}"
+       method: POST
+       headers:
+         Content-Type: "application/json"
+         Authorization: "Api-Token {{ dttoken }}"
+       status_code: 201
+       body_format: json
+       body:
+         message: "{ \"comment\": \"Evaluating the issue.\", \"user\": \"{{commentuser}}\", \"context\": \"Ansible Tower\" }"
+         context: "Ansible Tower"
+     when: state  == "OPEN"
 
   # - name: fetch deployment events (if any)
   #     uri:
