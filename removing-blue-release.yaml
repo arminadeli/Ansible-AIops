@@ -94,7 +94,7 @@
        status_code: 201
        body_format: json
        body:
-         message: " {{ tag[1] }} deployment has been deleted"
+         message: " {{ tags[0] }} deployment has been deleted"
          context: "Ansible Tower"
      when: state  == "OPEN"
 
