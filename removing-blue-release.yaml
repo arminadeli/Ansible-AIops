@@ -11,7 +11,7 @@
        status_code: 201
        body_format: json
        body:
-         message: "{ \"comment\": \"Evaluating the issue.\"}"
+         message: "Evaluating the issue."
          context: "Ansible Tower"
      when: state  == "OPEN"
 
@@ -24,15 +24,6 @@
   #     register: customproperties
   #     ignore_errors: no
   
-  # - name: fetch deployment events (if any)
-  #     uri:
-  #       url: "{{dtdeploymentapiurl}}"
-  #       return_content: yes
-  #     with_items: "{{ impactedEntities }}"
-  #     when: state == "OPEN"
-  #     register: customproperties
-  #     ignore_errors: no
-
   #   - name: parse deployment events
   #      when: state == "OPEN"
   #       set_fact:
@@ -93,7 +84,21 @@
   #            }'
   #     when: state == "OPEN"  
 
-   - name: Update Problem card on Dynatrace
+   - name: faulty deployment has been deleted
+     uri:
+       url: "{{ dtcommentapiurl }}"
+       method: POST
+       headers:
+         Content-Type: "application/json"
+         Authorization: "Api-Token {{ dttoken }}"
+       status_code: 201
+       body_format: json
+       body:
+         message: " {{ tag[1] }} deployment has been deleted"
+         context: "Ansible Tower"
+     when: state  == "OPEN"
+
+   - name: Blue deployment has been deleted
      uri:
        url: "{{ dtcommentapiurl }}"
        method: POST
