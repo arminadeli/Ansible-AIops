@@ -33,6 +33,18 @@
   #     register: customproperties
   #     ignore_errors: no
 
+  #   - name: parse deployment events
+  #      when: state == "OPEN"
+  #       set_fact:
+  #         deployment_events: "{{item.json.events}}"
+  #       with_items: "{{ customproperties.results }}"
+  #       register: deployment_events
+
+  #   - name: get most recent deployment
+  #     when: state == "OPEN"
+  #     set_fact:
+  #       myItem: "{{ deployment_events | first }}"
+
    - name: delete blue pod
      shell:
       "kubectl delete deployment deployment-blue && kubectl delete svc deployment-blue"
@@ -47,6 +59,39 @@
      shell:
       "kubectl apply -f /home/ubuntu/k8s/canary-release/ingress-canary-green.yaml"
      when: state  == "OPEN"
+
+  #  - name: "update deployment information"
+  #     uri:
+  #       url: "{{dtdeploymentapiurl}}"
+  #       body_format: json
+  #       method: POST
+  #       body: '{ 
+  #          "eventType": "CUSTOM_DEPLOYMENT", 
+  #          "attachRules": 
+  #            { 
+  #            "tagRule" : 
+  #               [{ 
+  #                  "meTypes" : ["SERVICE"], 
+  #                  "tags" : 
+  #                  [ 
+  #                     { 
+  #                        "context" : "CONTEXTLESS", 
+  #                        "key" : "My_service" 
+  #                     } 
+  #                  ]
+  #               }] },
+  #               "deploymentName":"Rolling back the 1.0 build",
+  #               "deploymentVersion":"latest",
+  #               "remediationAction":"revert-changes.yaml",
+  #               "source":"Ansible",
+  #               "customProperties":
+  #               {
+  #                 "CI Tool": "Ansible Tower",
+  #                 "Current docker version (tag value) ": "1.0",
+  #                 "Upgrading to docker version (tag value)": "latest" 
+  #               }
+  #            }'
+  #     when: state == "OPEN"  
 
    - name: Update Problem card on Dynatrace
      uri:
