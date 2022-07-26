@@ -65,7 +65,7 @@
          context: "Ansible Tower"
      when: state  == "OPEN"
 
-    - name: impacted service detection
+   - name: impacted service detection
      uri:
        url: "{{ dtcommentapiurl }}"
        method: POST
