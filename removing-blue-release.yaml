@@ -51,6 +51,34 @@
       "kubectl apply -f /home/ubuntu/k8s/canary-release/ingress-canary-green.yaml"
      when: state  == "OPEN"
 
+   - name: dectection of faulty deployment
+     uri:
+       url: "{{ dtcommentapiurl }}"
+       method: POST
+       headers:
+         Content-Type: "application/json"
+         Authorization: "Api-Token {{ dttoken }}"
+       status_code: 201
+       body_format: json
+       body:
+         message: " {{ tags[0] }} deployment detected as root cause of the fault"
+         context: "Ansible Tower"
+     when: state  == "OPEN"
+
+    - name: impacted service detection
+     uri:
+       url: "{{ dtcommentapiurl }}"
+       method: POST
+       headers:
+         Content-Type: "application/json"
+         Authorization: "Api-Token {{ dttoken }}"
+       status_code: 201
+       body_format: json
+       body:
+         message: " {{ impactedEntities[0]['name'] }} service detected as the root cause. Running Ansible playbook to forward all traffic to green deployment"
+         context: "Ansible Tower"
+     when: state  == "OPEN"
+
   #  - name: "update deployment information"
   #     uri:
   #       url: "{{dtdeploymentapiurl}}"
@@ -84,19 +112,7 @@
   #            }'
   #     when: state == "OPEN"  
 
-   - name: faulty deployment has been deleted
-     uri:
-       url: "{{ dtcommentapiurl }}"
-       method: POST
-       headers:
-         Content-Type: "application/json"
-         Authorization: "Api-Token {{ dttoken }}"
-       status_code: 201
-       body_format: json
-       body:
-         message: " {{ tags[0] }} deployment detected as root cause of the fault"
-         context: "Ansible Tower"
-     when: state  == "OPEN"
+   
 
    - name: Blue deployment has been deleted
      uri:
