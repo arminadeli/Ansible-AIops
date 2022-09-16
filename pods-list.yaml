@@ -3,6 +3,6 @@
   tasks:
    - name: Check running pods
      shell:
-      "kubectl get pods -A"
+      "k get pods -A"
      register: podslist
    
